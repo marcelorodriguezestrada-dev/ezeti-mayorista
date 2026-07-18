@@ -26,7 +26,7 @@ export function renderGrid(onAdd, onSelectTier) {
     card.innerHTML = `
       <div class="card-img" style="background:${catInfo.color}22;">
         <span class="card-tag" style="background:${catInfo.color}">${catInfo.label}</span>
-        ${p.emoji}
+        ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;">` : p.emoji}
       </div>
       <div class="card-body">
         <div class="card-title">${p.name}</div>
