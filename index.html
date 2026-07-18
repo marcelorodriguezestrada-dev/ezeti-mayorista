@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ezeti Mayorista — Pedido al por mayor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/styles/tokens.css">
+<link rel="stylesheet" href="src/styles/layout.css">
+<link rel="stylesheet" href="src/styles/components.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div class="brand-name">Ezeti Mayorista</div>
+        <div class="brand-sub">JUGUETES · LIBRERÍA · BIJOU · COTILLÓN</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#testimonios">Kiosqueros</a>
+      <a href="#" onclick="return false;">Cómo comprar</a>
+    </nav>
+    <button class="cart-btn" id="cartOpenBtn">
+      🧾 Hoja de pedido
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+  <div class="goal-bar-wrap">
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goalFill"></div></div>
+    <div class="goal-text" id="goalText">Agregá productos y mirá cuánto te falta para <strong>envío gratis</strong> a todo el país.</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span></span> PRECIOS ACTUALIZADOS ESTA SEMANA</div>
+    <h1>Comprá al por mayor.<br>Vendé con <em>margen real</em>.</h1>
+    <p>Catálogo pensado para kiosco, bazar y librería. Elegís cantidad, vas viendo cuánto ganás por unidad, y el pedido se manda directo por WhatsApp — sin vueltas.</p>
+    <div class="hero-stats">
+      <div class="hstat"><b>+180</b><span>KIOSQUEROS ACTIVOS</span></div>
+      <div class="hstat"><b>2-3 días</b><span>DESDE CONFIRMADO EL PAGO</span></div>
+      <div class="hstat"><b>x2.1</b><span>MARGEN PROMEDIO*</span></div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#catalogo">Ver catálogo mayorista</a>
+      <a class="btn-ghost" href="#testimonios">Ver quién ya compró</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hero-card-row"><span>Pulsera Strass x12 — docena</span><span class="mono">$6.200</span></div>
+    <div class="hero-card-row"><span>Cuaderno Universo — media docena</span><span class="mono">$9.600</span></div>
+    <div class="hero-card-row"><span>Muñeca Bebota — docena</span><span class="mono">$15.300</span></div>
+    <div class="hero-card-row" style="border:none;padding-top:12px;">
+      <span style="font-weight:800;">Ganancia estimada del pedido</span>
+      <span class="gain-pill">+ $21.400</span>
+    </div>
+  </div>
+</section>
+
+<div class="banner">
+  <div class="banner-inner">
+    🎁 <span><b>Regalo en tu primer pedido:</b> mandanos tu Hoja de Pedido por WhatsApp y sumamos una muestra de bijouterie sin cargo, para que la pruebes con tus clientes.</span>
+  </div>
+</div>
+
+<div class="filters" id="filters">
+  <button class="chip active" data-cat="all"><span class="dot" style="background:var(--ink)"></span>Todo</button>
+  <button class="chip" data-cat="juguetes"><span class="dot" style="background:var(--rojo)"></span>Juguetes</button>
+  <button class="chip" data-cat="libreria"><span class="dot" style="background:var(--azul)"></span>Librería</button>
+  <button class="chip" data-cat="bijou"><span class="dot" style="background:var(--amarillo)"></span>Bijouterie / Cotillón</button>
+</div>
+
+<a id="catalogo"></a>
+<div class="grid" id="grid"></div>
+
+<section class="testi-section" id="testimonios">
+  <div class="testi-title">// EJEMPLO — reemplazá por testimonios reales de tus clientes //</div>
+  <div class="testi-grid">
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Pido la docena de pulseras cada quincena, nunca me falló la entrega."</div>
+      <div class="testi-who">— Kiosco (a completar), Berazategui</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"El precio por bulto de cotillón me deja mejor margen que en cualquier otro mayorista."</div>
+      <div class="testi-who">— Bazar (a completar), Quilmes</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Hago el pedido por WhatsApp en 2 minutos, sin registrarme en ningún lado."</div>
+      <div class="testi-who">— Librería (a completar), La Plata</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  EZETI MAYORISTA · PEDIDO MÍNIMO $15.000 · ENTREGA 2-3 DÍAS HÁBILES TRAS CONFIRMAR PAGO<br>
+  * Margen estimado sobre precio de reventa sugerido — configurable en <span class="mono">src/data/products.js</span>.
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div>
+      <h3>Hoja de Pedido Mayorista</h3>
+      <div class="stamp">REMITO N° 0001 · sin cargo hasta confirmar</div>
+    </div>
+    <button class="close-btn" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="drawer-goal">
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goalFill2"></div></div>
+    <div class="goal-text" id="goalText2"></div>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="foot-row"><span>Ganancia estimada del pedido</span><span class="mono" id="foldGain" style="color:var(--plata);font-weight:700;">$0</span></div>
+    <div class="foot-total"><span>Total pedido</span><span id="foldTotal">$0</span></div>
+    <button class="wa-btn" id="waBtn">📲 Confirmar por WhatsApp</button>
+    <div class="wa-note">Se abre WhatsApp con tu Hoja de Pedido cargada. Entrega estimada: 2-3 días hábiles desde que confirmás la transferencia.</div>
+  </div>
+</div>
+
+<script type="module" src="src/js/main.js"></script>
+</body>
+</html>

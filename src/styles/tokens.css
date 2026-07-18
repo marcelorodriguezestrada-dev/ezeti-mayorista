@@ -1,0 +1,28 @@
+/* ==========================================================================
+   DESIGN TOKENS — Ezeti Mayorista
+   Paleta "caja de juguete mayorista": kraft + tinta + 3 acentos de categoría
+   + 1 acento de "ganancia" (plata/billete, usado solo para encuadre de margen).
+   Cambiá estos valores para "reskinear" toda la app sin tocar componentes.
+   ========================================================================== */
+:root{
+  /* base */
+  --kraft:#FAF7F0;
+  --kraft-dark:#EFE9DC;
+  --ink:#1D1B16;
+  --ink-soft:#5C574B;
+  --line:#DCD4C0;
+  --white:#FFFDF9;
+
+  /* acentos de categoría */
+  --rojo:#E8402C;      /* juguetes */
+  --azul:#1F6FEB;      /* librería */
+  --amarillo:#F5B700;  /* bijou / cotillón */
+
+  /* acento de ganancia (encuadre de margen, no es un color de categoría) */
+  --plata:#1B8A5A;
+  --plata-bg:#E4F3EB;
+
+  /* estructura */
+  --radius:14px;
+  --shadow: 0 2px 0 rgba(29,27,22,0.06), 0 8px 24px rgba(29,27,22,0.06);
+}
