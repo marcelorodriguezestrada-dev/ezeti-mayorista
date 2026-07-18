@@ -3,3 +3,7 @@ node_modules/
 *.log
 .env
 dist/
+
+# Datos de referencia del proveedor — NUNCA subir a un repo público
+tools/*.csv
+tools/*.xlsx
