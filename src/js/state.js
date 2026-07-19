@@ -12,9 +12,11 @@ function loadCart() {
 }
 
 export const state = {
-  cart: loadCart(),   // { [productId]: { tierIndex } }
+  cart: loadCart(),   // { [productId]: { tierIndex, qty } }
   selectedTier: {},   // { [productId]: tierIndex }
+  pendingQty: {},      // { [productId]: qty a agregar (antes de tocar "Agregar") }
   activeCat: "all",
+  checkoutStep: "cart", // "cart" | "checkout"
 };
 
 export function persistCart() {
@@ -53,9 +55,27 @@ export function setSelectedTier(productId, tierIndex) {
   state.selectedTier[productId] = tierIndex;
 }
 
+export function getPendingQty(productId) {
+  return state.pendingQty[productId] ?? 1;
+}
+
+export function setPendingQty(productId, qty) {
+  state.pendingQty[productId] = Math.max(1, qty);
+}
+
 export function addToCart(productId) {
   const tierIndex = getSelectedTierIndex(productId);
-  state.cart[productId] = { tierIndex };
+  const qtyToAdd = getPendingQty(productId);
+  const existing = state.cart[productId];
+  const newQty = existing ? existing.qty + qtyToAdd : qtyToAdd;
+  state.cart[productId] = { tierIndex, qty: newQty };
+  state.pendingQty[productId] = 1; // reset selector tras agregar
+  persistCart();
+}
+
+export function updateCartQty(productId, qty) {
+  if (!state.cart[productId]) return;
+  state.cart[productId].qty = Math.max(1, qty);
   persistCart();
 }
 
@@ -66,6 +86,7 @@ export function removeFromCart(productId) {
 
 export function clearCart() {
   state.cart = {};
+  state.checkoutStep = "cart";
   persistCart();
 }
 
@@ -75,9 +96,10 @@ export function cartTotals() {
   let count = 0;
   Object.keys(state.cart).forEach((id) => {
     const product = PRODUCTS.find((p) => p.id == id);
-    const tier = product.tiers[state.cart[id].tierIndex];
-    total += tier.price;
-    gain += gainFor(product, tier);
+    const item = state.cart[id];
+    const tier = product.tiers[item.tierIndex];
+    total += tier.price * item.qty;
+    gain += gainFor(product, tier) * item.qty;
     count += 1;
   });
   return { total, gain, count };

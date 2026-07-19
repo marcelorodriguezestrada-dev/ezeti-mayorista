@@ -39,7 +39,7 @@
 
 <section class="hero">
   <div>
-    <div class="eyebrow"><span></span> PRECIOS ACTUALIZADAS ESTA SEMANA</div>
+    <div class="eyebrow"><span></span> PRECIOS ACTUALIZADOS ESTA SEMANA</div>
     <h1>Comprá al por mayor.<br>Vendé con <em>margen real</em>.</h1>
     <p>Catálogo pensado para kiosco, bazar y librería. Elegís cantidad, vas viendo cuánto ganás por unidad, y el pedido se manda directo por WhatsApp — sin vueltas.</p>
     <div class="hero-stats">
@@ -113,16 +113,46 @@
     </div>
     <button class="close-btn" id="cartCloseBtn">✕</button>
   </div>
-  <div class="drawer-goal">
-    <div class="goal-bar-track"><div class="goal-bar-fill" id="goalFill2"></div></div>
-    <div class="goal-text" id="goalText2"></div>
+
+  <div id="drawerCartStep">
+    <div class="drawer-goal">
+      <div class="goal-bar-track"><div class="goal-bar-fill" id="goalFill2"></div></div>
+      <div class="goal-text" id="goalText2"></div>
+    </div>
+    <div class="drawer-items" id="drawerItems"></div>
+    <div class="drawer-foot">
+      <div class="foot-row"><span>Ganancia estimada del pedido</span><span class="mono" id="foldGain" style="color:var(--plata);font-weight:700;">$0</span></div>
+      <div class="foot-total"><span>Total pedido</span><span id="foldTotal">$0</span></div>
+      <button class="wa-btn" id="continueBtn" disabled>Continuar</button>
+      <div class="wa-note">Pedido mínimo <span class="mono">$70.000</span> para poder continuar.</div>
+    </div>
   </div>
-  <div class="drawer-items" id="drawerItems"></div>
-  <div class="drawer-foot">
-    <div class="foot-row"><span>Ganancia estimada del pedido</span><span class="mono" id="foldGain" style="color:var(--plata);font-weight:700;">$0</span></div>
-    <div class="foot-total"><span>Total pedido</span><span id="foldTotal">$0</span></div>
-    <button class="wa-btn" id="waBtn">📲 Confirmar por WhatsApp</button>
-    <div class="wa-note">Se abre WhatsApp con tu Hoja de Pedido cargada. Entrega estimada: 2-3 días hábiles desde que confirmás la transferencia.</div>
+
+  <div id="drawerCheckoutStep" style="display:none;">
+    <div class="drawer-items">
+      <button class="di-remove" id="backToCartBtn" style="margin-bottom:12px;">← Volver al pedido</button>
+      <div class="card-title" style="margin-bottom:10px;">Tus datos de contacto</div>
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Nombre *</label>
+      <input type="text" id="ckNombre" placeholder="Nombre y apellido" style="width:100%;padding:10px;margin:4px 0 12px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;">
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Teléfono *</label>
+      <input type="tel" id="ckTelefono" placeholder="11 1234 5678" style="width:100%;padding:10px;margin:4px 0 12px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;">
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Localidad</label>
+      <input type="text" id="ckLocalidad" placeholder="Ciudad / barrio" style="width:100%;padding:10px;margin:4px 0 12px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;">
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Comentario (opcional)</label>
+      <textarea id="ckComentario" placeholder="Horario de contacto, referencia, etc." style="width:100%;padding:10px;margin:4px 0 12px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;min-height:60px;"></textarea>
+
+      <div class="card-title" style="margin:16px 0 8px;font-size:14px;">Resumen del pedido (<span id="checkoutCount">0</span> productos)</div>
+      <div id="checkoutSummary"></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="foot-total"><span>Total pedido</span><span id="checkoutTotal">$0</span></div>
+      <button class="wa-btn" id="waBtn">📲 Confirmar por WhatsApp</button>
+      <div class="wa-note">Se abre WhatsApp con tu Hoja de Pedido cargada. Entrega estimada: 2-3 días hábiles desde que confirmás la transferencia.</div>
+    </div>
   </div>
 </div>
 
