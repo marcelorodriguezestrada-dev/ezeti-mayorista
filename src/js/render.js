@@ -8,7 +8,7 @@ import {
   cartTotals,
   visibleProducts,
 } from "./state.js";
-import { FREE_SHIPPING_THRESHOLD } from "./config.js";
+import { MIN_ORDER } from "./config.js";
 
 export function renderGrid(onAdd, onSelectTier) {
   const grid = document.getElementById("grid");
@@ -21,6 +21,17 @@ export function renderGrid(onAdd, onSelectTier) {
     const gain = gainFor(p, tier);
     const perUnitCost = Math.round(tier.price / tier.qty);
 
+    const hasStockData = typeof p.stock === "number";
+    const outOfStock = hasStockData && p.stock <= 0;
+    let stockHtml;
+    if (outOfStock) {
+      stockHtml = `<div class="stock-row" style="color:var(--rojo);font-weight:700;">🚫 Sin stock por el momento</div>`;
+    } else if (hasStockData) {
+      stockHtml = `<div class="stock-row">📦 Quedan ${p.stock} unidades</div>`;
+    } else {
+      stockHtml = `<div class="stock-row">📦 Sujeto a confirmación de stock al recibir tu pedido</div>`;
+    }
+
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -31,7 +42,7 @@ export function renderGrid(onAdd, onSelectTier) {
       <div class="card-body">
         <div class="card-title">${p.name}</div>
         <div class="social-proof"><span class="flame">🔥</span> ${p.buyers} kiosqueros lo pidieron este mes</div>
-        <div class="stock-row">📦 Sujeto a confirmación de stock al recibir tu pedido</div>
+        ${stockHtml}
         <div class="price-block">
           <div class="anchor-row">
             <span>Reventa sugerida</span>
@@ -55,7 +66,7 @@ export function renderGrid(onAdd, onSelectTier) {
             )
             .join("")}
         </div>
-        <button class="add-btn" data-pid="${p.id}">Agregar a la hoja de pedido</button>
+        <button class="add-btn" data-pid="${p.id}" ${outOfStock ? "disabled style=\"opacity:0.5;cursor:not-allowed;\"" : ""}>${outOfStock ? "Sin stock" : "Agregar a la hoja de pedido"}</button>
       </div>
     `;
     grid.appendChild(card);
@@ -80,12 +91,12 @@ export function renderCart(onRemove) {
   document.getElementById("foldTotal").textContent = fmt(total);
   document.getElementById("foldGain").textContent = fmt(gain);
 
-  const pct = Math.min(100, Math.round((total / FREE_SHIPPING_THRESHOLD) * 100));
-  const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
+  const pct = Math.min(100, Math.round((total / MIN_ORDER) * 100));
+  const remaining = Math.max(0, MIN_ORDER - total);
   const goalMsg =
     remaining > 0
-      ? `Llevás <strong>${fmt(total)}</strong> — te faltan <strong>${fmt(remaining)}</strong> para envío gratis a todo el país.`
-      : `<strong>¡Envío gratis desbloqueado!</strong> Superaste ${fmt(FREE_SHIPPING_THRESHOLD)}.`;
+      ? `Llevás <strong>${fmt(total)}</strong> — te faltan <strong>${fmt(remaining)}</strong> para llegar al pedido mínimo de ${fmt(MIN_ORDER)}.`
+      : `<strong>¡Pedido mínimo alcanzado!</strong> Ya podés confirmar por WhatsApp.`;
 
   ["goalFill", "goalFill2"].forEach((id) => (document.getElementById(id).style.width = pct + "%"));
   ["goalText", "goalText2"].forEach((id) => (document.getElementById(id).innerHTML = goalMsg));

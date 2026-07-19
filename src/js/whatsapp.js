@@ -1,11 +1,15 @@
 import { PRODUCTS } from "../data/products.js";
 import { state, fmt, cartTotals, clearCart } from "./state.js";
-import { WHATSAPP_NUMBER } from "./config.js";
+import { WHATSAPP_NUMBER, MIN_ORDER } from "./config.js";
 
 export function sendWhatsapp(onSent) {
   const { total, count } = cartTotals();
   if (count === 0) {
     alert("Agregá al menos un producto antes de confirmar.");
+    return;
+  }
+  if (total < MIN_ORDER) {
+    alert(`El pedido mínimo es ${fmt(MIN_ORDER)}. Te faltan ${fmt(MIN_ORDER - total)} para poder confirmar.`);
     return;
   }
 

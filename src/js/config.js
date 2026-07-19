@@ -2,8 +2,7 @@
    CONFIG DEL NEGOCIO — editá esto con tus datos reales.
    ========================================================================== */
 export const WHATSAPP_NUMBER = "5491167076678"; // número real del negocio
-export const FREE_SHIPPING_THRESHOLD = 25000;    // TODO: monto real para envío gratis
-export const MIN_ORDER = 15000;                  // TODO: pedido mínimo real
+export const MIN_ORDER = 70000;                  // pedido mínimo real
 export const MARGIN_PERCENT = 0.08;               // 8% — tu margen sobre el precio del proveedor
 
 /* --------------------------------------------------------------------------
