@@ -16,6 +16,7 @@ import {
   showCheckoutStep,
 } from "./render.js";
 import { sendWhatsapp } from "./whatsapp.js";
+import { initMarketing } from "./marketing.js";
 
 function refresh() {
   renderGrid(handleAdd, handleSelectTier, handleQtyChange);
@@ -83,3 +84,4 @@ document.getElementById("waBtn").addEventListener("click", () => {
 
 renderFilters(handleFilter);
 refresh();
+initMarketing();

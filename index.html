@@ -25,6 +25,7 @@
       <a href="#catalogo">Catálogo</a>
       <a href="#testimonios">Kiosqueros</a>
       <a href="#" onclick="return false;">Cómo comprar</a>
+      <a href="#" id="marketingOpenBtn">📣 Marketing</a>
     </nav>
     <button class="cart-btn" id="cartOpenBtn">
       🧾 Hoja de pedido
@@ -50,15 +51,6 @@
     <div class="hero-cta">
       <a class="btn-primary" href="#catalogo">Ver catálogo mayorista</a>
       <a class="btn-ghost" href="#testimonios">Ver quién ya compró</a>
-    </div>
-  </div>
-  <div class="hero-card">
-    <div class="hero-card-row"><span>Transportes Jenga (madera)</span><span class="mono">$8.100</span></div>
-    <div class="hero-card-row"><span>Pizarra Frutas con Marcador</span><span class="mono">$8.856</span></div>
-    <div class="hero-card-row"><span>Rompecabezas Torre 30 piezas</span><span class="mono">$17.820</span></div>
-    <div class="hero-card-row" style="border:none;padding-top:12px;">
-      <span style="font-weight:800;">Ganancia estimada del pedido</span>
-      <span class="gain-pill">+ $16.724</span>
     </div>
   </div>
 </section>
@@ -152,6 +144,36 @@
       <div class="foot-total"><span>Total pedido</span><span id="checkoutTotal">$0</span></div>
       <button class="wa-btn" id="waBtn">📲 Confirmar por WhatsApp</button>
       <div class="wa-note">Se abre WhatsApp con tu Hoja de Pedido cargada. Entrega estimada: 2-3 días hábiles desde que confirmás la transferencia.</div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="marketingOverlay"></div>
+<div class="mk-modal" id="marketingModal">
+  <div class="mk-modal-inner">
+    <div class="drawer-head">
+      <h3>📣 Generador de posts</h3>
+      <button class="close-btn" id="marketingCloseBtn">✕</button>
+    </div>
+
+    <div class="mk-modal-body">
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Producto</label>
+      <select id="mkProduct" style="width:100%;padding:10px;margin:4px 0 14px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;"></select>
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Red social</label>
+      <div class="filters" id="mkRedChips" style="margin:6px 0 14px;padding:0;"></div>
+
+      <label class="mono" style="font-size:11px;color:var(--ink-soft);">Público</label>
+      <div class="filters" id="mkPublicoChips" style="margin:6px 0 14px;padding:0;"></div>
+
+      <button class="btn-primary" id="mkGenerateBtn" style="width:100%;border:none;">Generar 3 posts</button>
+
+      <div id="mkResults" style="margin-top:16px;display:flex;flex-direction:column;gap:14px;"></div>
+
+      <button class="wa-btn" id="mkSaveBtn" style="display:none;margin-top:14px;background:var(--ink);">💾 Guardar en historial</button>
+
+      <div class="card-title" style="margin:24px 0 10px;font-size:14px;">Historial de campañas</div>
+      <div id="mkHistoryList"></div>
     </div>
   </div>
 </div>
