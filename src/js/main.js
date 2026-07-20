@@ -18,6 +18,26 @@ import {
 import { sendWhatsapp } from "./whatsapp.js";
 import { initMarketing } from "./marketing.js";
 
+const ADMIN_KEY = "ezeti-mayorista-admin";
+
+function checkAdminMode() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("admin") === "1") {
+    try {
+      localStorage.setItem(ADMIN_KEY, "1");
+    } catch {}
+  }
+  let isAdmin = false;
+  try {
+    isAdmin = localStorage.getItem(ADMIN_KEY) === "1";
+  } catch {}
+
+  if (isAdmin) {
+    document.getElementById("marketingOpenBtn").style.display = "";
+  }
+  return isAdmin;
+}
+
 function refresh() {
   renderGrid(handleAdd, handleSelectTier, handleQtyChange);
   renderCart(handleRemove, handleCartQtyChange);
@@ -84,4 +104,6 @@ document.getElementById("waBtn").addEventListener("click", () => {
 
 renderFilters(handleFilter);
 refresh();
-initMarketing();
+if (checkAdminMode()) {
+  initMarketing();
+}
